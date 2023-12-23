@@ -38,6 +38,15 @@ void ASCharacter::Tick(float DeltaTime)
 void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	PlayerInputComponent->BindAxis("MoveForward",this,&ASCharacter::MoveForward);
 
+	PlayerInputComponent->BindAxis("Turn",this,&ASCharacter::AddControllerYawInput); 
 }
+
+
+void ASCharacter::MoveForward(float value)
+{
+	AddMovementInput(GetActorForwardVector(),value);
+}
+
 
