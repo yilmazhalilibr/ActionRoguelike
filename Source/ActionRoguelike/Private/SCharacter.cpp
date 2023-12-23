@@ -2,11 +2,12 @@
 
 
 #include "SCharacter.h"
+#include "CharacterInfo.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -15,12 +16,14 @@ ASCharacter::ASCharacter()
 void ASCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+
 }
 
 // Called every frame
 void ASCharacter::Tick(float DeltaTime)
 {
+
 	Super::Tick(DeltaTime);
 
 }
