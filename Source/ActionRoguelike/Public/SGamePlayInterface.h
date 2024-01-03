@@ -14,7 +14,7 @@ class USGamePlayInterface : public UInterface
 };
 
 /**
- * 
+ *
  */
 class ACTIONROGUELIKE_API ISGamePlayInterface
 {
@@ -22,6 +22,6 @@ class ACTIONROGUELIKE_API ISGamePlayInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	UFUNCTION(BlueprintNativeEvent)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Interact(APawn* InstigatorPawn);
 };
