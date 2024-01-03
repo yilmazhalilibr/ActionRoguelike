@@ -82,7 +82,7 @@ void ASCharacter::MoveRight(float value)
 void ASCharacter::PrimaryAttack()
 {
 	PlayAnimMontage(AttackAnim);
- 
+
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle_PrimaryAttack, this, &ASCharacter::PrimaryAttack_TimeElapse, 0.2f);
 	//GetWorld()->GetTimerManager().ClearTimer(TimerHandle_PrimaryAttack);
 
