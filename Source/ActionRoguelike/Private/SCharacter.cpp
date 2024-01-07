@@ -112,5 +112,6 @@ void ASCharacter::PrimaryAttack_TimeElapse()
 
 void ASCharacter::Jump()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Jump trigged"));
 }
 
