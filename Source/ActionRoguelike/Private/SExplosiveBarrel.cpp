@@ -2,6 +2,7 @@
 
 
 #include "SExplosiveBarrel.h"
+#include <DrawDebugHelpers.h>
 
 // Sets default values
 ASExplosiveBarrel::ASExplosiveBarrel()
@@ -17,7 +18,7 @@ ASExplosiveBarrel::ASExplosiveBarrel()
 	ForceComp->SetupAttachment(false);
 	ForceComp->SetAutoActivate(false);
 	ForceComp->Radius = 750.0f;
-	ForceComp->ImpulseStrength = 2500.0f;
+	ForceComp->ImpulseStrength = 500.0f;
 	ForceComp->bImpulseVelChange = true;
 	ForceComp->AddCollisionChannelToAffect(ECC_WorldDynamic);
 
@@ -47,6 +48,10 @@ void ASExplosiveBarrel::PostInitializeComponents()
 void ASExplosiveBarrel::OnActorHit(UPrimitiveComponent* HitActor, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	ForceComp->FireImpulse();
+
+	UE_LOG(LogTemp, Warning, TEXT("OtherActor Name: %s , at game time: %f"), *GetNameSafe(OtherActor), GetWorld()->TimeSeconds);
+	FString CombinedString = FString::Printf(TEXT("Hit at location: %s"), *Hit.ImpactPoint.ToString());
+	DrawDebugString(GetWorld(), Hit.ImpactPoint, CombinedString, nullptr, FColor::Green, 2.0f, true);
 }
 
 
