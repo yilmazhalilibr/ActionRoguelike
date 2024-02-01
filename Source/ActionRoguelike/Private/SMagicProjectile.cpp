@@ -35,6 +35,8 @@ void ASMagicProjectile::OnActorOverlap(UPrimitiveComponent* OverlappedComponent,
 		USAttributeComponent* AttributeComp = Cast<USAttributeComponent>(OtherActor->GetComponentByClass(USAttributeComponent::StaticClass()));
 		if (AttributeComp)
 		{
+			//Changed health state.
+
 			AttributeComp->ApplyHealthChange(-20.f);
 			UE_LOG(LogTemp, Warning, TEXT("Health : %f"), AttributeComp->GetHealth());
 			Destroy();
