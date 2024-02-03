@@ -7,25 +7,29 @@
 #include "SAttributeComponent.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnHealthChanged, AActor*, InstigatorActor, USAttributeComponent*, OwningComp, float, NewHealth, float, Delta);
+
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class ACTIONROGUELIKE_API USAttributeComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	USAttributeComponent();
 
 
 protected:
 
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Attributes")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes")
 	float Health;
 
-public:	
+public:
+	UPROPERTY(BlueprintAssignable)
+	FOnHealthChanged OnHealthChange;
 
-	UFUNCTION(BlueprintCallable,Category="Attributes")
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	bool ApplyHealthChange(float Delta);
 	float GetHealth();
-		
+
 };
