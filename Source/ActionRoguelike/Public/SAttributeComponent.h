@@ -26,7 +26,7 @@ protected:
 
 public:
 	UPROPERTY(BlueprintAssignable)
-	FOnHealthChanged OnHealthChange;
+	FOnHealthChanged OnHealthChanged;
 
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	bool ApplyHealthChange(float Delta);
