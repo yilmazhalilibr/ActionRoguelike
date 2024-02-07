@@ -20,6 +20,7 @@ void ASTargetDummy::OnHealthChanged(AActor* InstigatorActor, USAttributeComponen
 {
 	if (Delta < 0.0f)
 	{
+		//Event in material
 		MeshComp->SetScalarParameterValueOnMaterials("TimeToHit", GetWorld()->TimeSeconds);
 	}
 }
