@@ -5,7 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "SAttributeComponent.h"
 
-// Sets default values
+// Sets default values.
 ASTargetDummy::ASTargetDummy()
 {
 s	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>("StaticMesh Comp");
