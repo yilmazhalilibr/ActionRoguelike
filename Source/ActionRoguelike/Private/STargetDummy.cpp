@@ -8,7 +8,7 @@
 // Sets default values.
 ASTargetDummy::ASTargetDummy()
 {
-s	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>("StaticMesh Comp");
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>("StaticMesh Comp");
 	RootComponent = MeshComp;
 
 	AttributeComp = CreateDefaultSubobject<USAttributeComponent>("AttributeComp");
@@ -25,4 +25,3 @@ void ASTargetDummy::OnHealthChanged(AActor* InstigatorActor, USAttributeComponen
 	}
 }
 
-  
