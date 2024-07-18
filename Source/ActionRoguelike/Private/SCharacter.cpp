@@ -7,6 +7,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "SInteractionComponent.h"
 #include "SAttributeComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -120,5 +122,46 @@ void ASCharacter::PrimaryAttack_TimeElapse()
 void ASCharacter::Jump()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Jump trigged"));
+}
+
+void ASCharacter::SpawnProjectile(TSubclassOf<AActor> ClassToSpawn)
+{
+	if (ensure(ClassToSpawn))
+	{
+		FVector HandLocatino = GetMesh()->GetSocketLocation("Muzzle_01");
+
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		SpawnParams.Instigator = this;
+
+		FCollisionShape Shape;
+		Shape.SetSphere(20.0f);
+
+		FCollisionQueryParams Params;
+		Params.AddIgnoredActor(this);
+
+		FCollisionObjectQueryParams ObjParams;
+		ObjParams.AddObjectTypesToQuery(ECC_WorldDynamic);
+		ObjParams.AddObjectTypesToQuery(ECC_WorldStatic);
+		ObjParams.AddObjectTypesToQuery(ECC_Pawn);
+
+		FVector TraceStart = CameraComp->GetComponentLocation();
+
+		FVector TraceEnd = CameraComp->GetComponentLocation() + (CameraComp->GetForwardVector() * 5000.0f);
+
+		FHitResult HitResult;
+
+		if (GetWorld()->SweepSingleByObjectType(HitResult, TraceStart, TraceEnd, FQuat::Identity, ObjParams, Shape, Params))
+		{
+			TraceEnd = HitResult.ImpactPoint;
+		}
+
+
+		FRotator ProjRotation = FRotationMatrix::MakeFromX(TraceEnd - HandLocatino).Rotator();
+
+		FTransform SpawnTM = FTransform(ProjRotation, HandLocatino);
+		GetWorld()->SpawnActor<AActor>(ClassToSpawn, SpawnTM, SpawnParams);
+
+	}
 }
 

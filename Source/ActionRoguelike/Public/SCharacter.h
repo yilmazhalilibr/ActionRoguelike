@@ -4,13 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+//TSubclassOf lbirary
+#include "GameFramework/Actor.h"
 #include "SCharacter.generated.h"
+
 
 class UCameraComponent;
 class USpringArmComponent;
 class USInteractionComponent;
 class UAnimMontage;
 class USAttributeComponent;
+
 
 UCLASS()
 class ACTIONROGUELIKE_API ASCharacter : public ACharacter
@@ -59,6 +63,9 @@ protected:
 	void PrimaryAttack_TimeElapse();
 
 	void Jump();
+
+	UFUNCTION()
+	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
 
 public:
 	// Called every frame
